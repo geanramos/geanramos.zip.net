@@ -1,0 +1,25 @@
+.share { background-color: #efefef !important; float: left; margin-right: 12px; margin-top: 12px; padding: 4px 0 4px; width: 450px; }
+.share #facebook,
+.share #share-twitter,
+.share #g-plusone  { background: width: 50px; height: 21px; float: left;  overflow: hidden; padding: 0 10px; }
+.share #facebook  .fb_edge_widget_with_comment, .fb_iframe_widget { width: 100px !important; overflow: visible !important; }
+.share #share-link{ float: left; }
+.share #share-link span{ color: #b2b2b2 !important; font-size: 12px; }
+.share #share-link span input { display: inline; width: 120px; height: 19px; margin: 0 4px 0 4px; padding: 1px 3px; font-size: 12px; }
+
+.share-buttons a {
+    color: #c0c0c0;
+    font-size: 20px;
+    position: relative;
+    top: 3px;
+    margin: 0 1px
+}
+.share-buttons a:hover, .share-buttons a:active {
+    color: #1a77b0;
+}
+.post-item .post-footer .share-buttons {
+    margin-top: -3px;
+}
+.share-buttons {
+        display: none;
+    }
