@@ -368,7 +368,7 @@ function alertContents() {
 		</li>
 		<li id="pages-3" class="widget widget_pages"><h1 class="widgettitle">Visitas</h1>
 			<ul>
-			<img src="https://bloghosting.uol.com.br/contador.gif?tipo=17&amp;tam=6&amp;borda=0&amp;cor=0,0,0">
+			<img src="https://www.criarsites.com//wp-content/uploads/2013/04/Super-Contadores-de-Visitas-Online-Gratis-para-seu-Site.gif">
 			</ul>
 		</li>
 		</ul>
@@ -382,7 +382,7 @@ function alertContents() {
 </div>
 </div>
 <!-- Gean Ramos - https://facebook.com/geanramoss -->
-<iframe id="rodape" width="100%" height="118" frameborder="0" scrolling="no" src="https://mulher.uol.com.br/blogs-rodape-blogosfera.htm?utm_source=geanramos.zip.net&utm_medium=iframe-footer"></iframe>
+
 		</body>
 </html>
 <%DEFINE POST_TEXT STRING NULL%>
