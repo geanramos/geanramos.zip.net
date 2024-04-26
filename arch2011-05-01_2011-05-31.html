@@ -1,0 +1,1213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Blog do Gean Ramos &raquo; confirmado: @Sigapiovane é verdadeiro.</title>
+<link rel="shortcut icon" href="./favicon.ico?v=2016" type="image/x-icon" />
+<link rel="stylesheet" href="./style.css" type="text/css" media="screen" />
+<link rel=stylesheet type="text/css" href="./inc/css/animation.css">
+<link rel=stylesheet type="text/css" href="./inc/css/fontello-codes.css">
+<link rel=stylesheet type="text/css" href="./inc/css/fontello-embedded.css">
+<link rel=stylesheet type="text/css" href="./inc/css/fontello-ie7-codes.css">
+<link rel=stylesheet type="text/css" href="./inc/css/fontello.css">
+<!--[if IE 7]>
+<link rel=stylesheet type="text/css" href="./inc/css/fontello-ie7.css">
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="Feed de Blog do Gean Ramos &raquo;" href="http://geanramos.rssblog.zip.net" />
+<link rel="publisher" href="https://plus.google.com/+GeanRamos"/>
+<meta property="fb:admins" content="100000009730750"/>
+<meta property="fb:app_id" content="122527777827024"/>
+<meta property="fb:trace_id" content="HS8YYVSPQVt"/>
+<style type="text/css" media="screen">
+#page { background: url("./images/kubrickbg-ltr.jpg") repeat-y top; border: none; }
+div#logo_uolblog{position:absolute;left:849px;top:188px;z-index:1}
+<!--#headerimg h6 a, #headerimg h6 a:visited, #headerimg .description { color: #FFFFFF; } -->
+</style>
+<style type='text/css'></style>
+
+var zeroComm = "Comente";
+var humComm = "Apenas 1 comentário";
+var enesComm = "Vários Comentários";
+var url;
+function abre(url,w,h,scr) {
+	window.open(url,'comentarios','width='+w+',height='+h+',directories=0,location=0,menubar=0,resizable=1,scrollbars='+scr+',status=0,toolbar=0,marginleft=0,margintop=0,left=25,top=25');
+}
+
+function commentText(qtd) {
+	if(qtd == "0") {txtFinal = "("+qtd+") "+ zeroComm;}
+  else if (qtd == "1") {txtFinal = "("+qtd+") "+ humComm;}  
+  else {txtFinal = "("+qtd+") "+ enesComm;}
+  return txtFinal;
+}
+
+/* Declaração das variáveis */
+var periodoMesAtual = "";
+var periodoAnoAtual = "";
+var k = 0;
+var j = 0;
+var periodo = new Array();
+var periodoURL = new Array();
+
+
+	periodo[k++] = "01/02/2016 a 29/02/2016";
+	periodoURL[j++] = "arch2016-02-01_2016-02-29.html";
+
+	periodo[k++] = "01/06/2014 a 30/06/2014";
+	periodoURL[j++] = "arch2014-06-01_2014-06-30.html";
+
+	periodo[k++] = "01/05/2014 a 31/05/2014";
+	periodoURL[j++] = "arch2014-05-01_2014-05-31.html";
+
+	periodo[k++] = "01/11/2011 a 30/11/2011";
+	periodoURL[j++] = "arch2011-11-01_2011-11-30.html";
+
+	periodo[k++] = "01/06/2011 a 30/06/2011";
+	periodoURL[j++] = "arch2011-06-01_2011-06-30.html";
+
+	
+/* Acerta a altura das colunas dos meses para que não haja quebra de layout. */
+function defineAlturaColunas() {
+	var arquivo = document.getElementById("calendario").getElementsByTagName("ul");
+  var	maiorAltura = 0;
+	for (i = 0; i < arquivo.length; i++) {
+		((arquivo[i].offsetHeight > maiorAltura) ? maiorAltura = arquivo[i].offsetHeight : arquivo[i].style.height = maiorAltura);
+	}
+}
+
+/* Define o nome do mês baseado pelo index */
+function defineMes(numMes) {
+	var nomeMes = new Array();
+	nomeMes = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+	return nomeMes[eval(numMes - 1)];
+}
+
+/* Monta o calendário */
+ function montaCalendario(){
+	for(i in periodo) {
+		var periodoMes = periodo[i].substr(3,2); //Mes do periodo
+		var periodoAno = periodo[i].substr(6,4); //Ano do periodo
+	
+		/* Separa os anos */
+		if (periodoAnoAtual == "") {
+			document.write ("<ol class=\"ano\"><li><strong>" + periodoAno + "</strong></li>");
+			periodoAnoAtual = periodoAno;
+			periodoMesAtual = "";
+		}
+		else if (periodoAno != periodoAnoAtual) {
+			document.write ("</ol></ol><ol class=\"ano\"><li><strong>" + periodoAno + "</strong></li>");
+			periodoAnoAtual = periodoAno;
+			periodoMesAtual = "";
+		}
+	
+		/* Separa os meses */	
+		if (periodoMesAtual == "") {
+			document.write ("<ul class=\"mes\"><li><span>" + defineMes(periodoMes) + "</span></li>");		
+			periodoMesAtual = periodoMes;
+		}
+		else if (periodoMes != periodoMesAtual) {
+			document.write ("</ul><ul class=\"mes\"><li><span>" + defineMes(periodoMes) + "</span></li>");		
+			periodoMesAtual = periodoMes;
+		}	
+		/* Períodos */
+		document.write ("<li><a href=\"" + periodoURL[i] + "\">"+ periodo[i].replace(/\/20[0-9][0-9]/g, "") +"</a></li>");
+	}
+
+	/*Fecha Calendário*/
+	document.write ("</ol>");
+}
+
+/* Monta os períodos do arquivo no box lateral */
+function montaPeriodos() {
+		numMaximo = periodo.length;
+		for(i = 0; i < numMaximo; i ++) {
+			document.write ("<li class=\"link\"><a href=\"" + periodoURL[i] + "\">"+ periodo[i] +"</a></li>");
+		}
+}
+
+/* Faz o request do XML */
+var http_request = false;
+function makeRequest(url) {
+    http_request = false;
+    if (window.XMLHttpRequest) {
+        http_request = new XMLHttpRequest();
+        if (http_request.overrideMimeType) {
+            http_request.overrideMimeType('text/xml');
+        }
+    } else if (window.ActiveXObject) {
+        try {
+            http_request = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e) {
+            try {
+            http_request = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {}
+        }
+    }
+    if (!http_request) {
+        alert('Giving up :( Cannot create an XMLHTTP instance');
+        return false;
+    }
+    http_request.onreadystatechange = alertContents;
+    http_request.open('GET', url, true);
+    http_request.send(null);
+}
+function alertContents() {
+    if (http_request.readyState == 4) {
+        if (http_request.status == 200) {
+            mostraHistorico();
+        }
+        else {
+            //alert('Houve um problema com a requisição.');
+        }
+    }
+}						
+//Fim Request 
+
+/* Monta a lista dos últimos posts */						
+ function mostraHistorico() {                   
+ var xmlDoc = http_request.responseXML;
+ var item = xmlDoc.getElementsByTagName("item");
+ for(i = 0; i < item.length; i ++) {
+  var link = item[i].getElementsByTagName("link")[0].firstChild.nodeValue;
+  var titulo = item[i].getElementsByTagName("title")[0].firstChild.nodeValue.replace(/\s\-\sAutor\(.*\)$/,""); 
+  if (titulo == "") titulo = "Sem título"; 
+  var data = item[i].getElementsByTagName("pubDate")[0].firstChild.nodeValue; 
+  var er = /([a-z]{3}), ([0-9]{2}) ([a-z]{3}) ([0-9]{4}) ([0-9]{2}\:[0-9]{2}\:[0-9]{2}) -[0-9]{4}/i;
+  data = data.match(er);
+  var mes;
+  switch(data[3])
+  {
+   case 'Jan' : mes = '01' ; break;
+   case 'Feb' : mes = '02' ; break;
+   case 'Mar' : mes = '03' ; break;
+   case 'Apr' : mes = '04' ; break;
+   case 'May' : mes = '05' ; break;
+   case 'Jun' : mes = '06' ; break;
+   case 'Jul' : mes = '07' ; break;
+   case 'Aug' : mes = '08' ; break;
+   case 'Sep' : mes = '09' ; break;
+   case 'Oct' : mes = '10' ; break;
+   case 'Nov' : mes = '11' ; break;
+   case 'Dec' : mes = '12' ; break;
+  }
+  
+	
+ }
+}
+</script>
+
+</head>
+<body class="home blog">
+
+
+
+<div id="page">
+<div id="header" role="banner">
+	<div id="headerimg">
+		<h6><a href="https://geanramos.zip.net.50x.com.br/index.html">Blog do Gean Ramos</a></h6>
+		<div class="description">Blog do Gean Ramos</div>
+	</div>
+	<div id="logo_uolblog"><a href="http://mulher.uol.com.br/comportamento/?utm_source=geanramos.zip.net&utm_medium=blog-parceiro" target="_blank"><img src="https://geanramos.zip.net.50x.com.br/x.gif" alt="" width="180" height="19" border="0" /></a></div>
+	
+</div>
+<hr />
+	<div id="content" class="narrowcolumn" role="main">
+
+						
+                    
+					
+						<!-- Mensagens do Blog -->
+						<table cellpadding=0 cellspacing=0 border=0 width=100%><tr><td>
+		</td></tr>
+		<!-- / Categoria Titulo -->
+							
+                            
+                            
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-31_13_40_46-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0" rel="bookmark" title="Link permanente para confirmado: @Sigapiovane é verdadeiro.">confirmado: @Sigapiovane é verdadeiro.</a></h1>
+										<div align=left id=icon><small>Terça-feira ,  31 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-31_13_40_46-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=confirmado: @Sigapiovane é verdadeiro.&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p>Depois de uma pequena discuss&atilde;o no twitter, sobre se <a title="@SigaPiovani" href="http://twitter.com/SigaPiovani" target="_blank">@sigapiovane</a> e verdadeiro ou falso.</p><p><a title="@SigaPiovane: mentira seu cu" href="https://geanramos.zip.net.50x.com.br/images/sigapiovane-mentira-seu-cu.jpg" target="_self"><img style="border: 0;" src="https://geanramos.zip.net.50x.com.br/images/sigapiovane-mentira-seu-cu.jpg" alt="" width="400" height="120" /></a></p><p>Foi atr&aacute;s de respostas. E foi-nos confirmada atrav&eacute;s de sua <a href="mailto:juliana.cerqueira@luanapiovani.com.br">Assessora Pessoal Juliana Cerqueira</a> que o perfil no twitter &eacute; realmente verdadeiro.</p><p><a title="@Sigapiovane &eacute; verdadeiro" href="https://geanramos.zip.net.50x.com.br/images/sigapiovane-e-verdadeiro.jpg" target="_self"><img style="border: 0;" src="https://geanramos.zip.net.50x.com.br/images/sigapiovane-e-verdadeiro.jpg" alt="" width="400" height="225" /></a></p><p>Ent&atilde;o nos resta agora segui-la <a title="@SigaPiovani" href="http://twitter.com/SigaPiovani" target="_blank">@SigaPiovane</a></p><p>voc&ecirc; ainda n&atilde;o esta acreditando ent&atilde;o veja no blog de Luana Piovani. <a href="http://contato.luapio.blog.uol.com.br/arch2011-05-01_2011-05-31.html" target="_blank">http://contato.luapio.blog.uol.com.br/arch2011-05-01_2011-05-31.html</a></p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Terça-feira ,  31 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-31_13_40_46-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-31_13_40_46-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=confirmado: @Sigapiovane é verdadeiro.&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-31_13_40_46-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-31_13_40_46-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-28_01_52_39-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0" rel="bookmark" title="Link permanente para Luana Piovani estreou no Twitter">Luana Piovani estreou no Twitter</a></h1>
+										<div align=left id=icon><small>Sábado ,  28 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-28_01_52_39-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Luana Piovani estreou no Twitter&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="./images/piovani-estreiou-twitter.jpg" alt="Luana Piovani estreou no Twitter" /></p><p><a title="@SigaPiovani" href="http://twitter.com/SigaPiovani" target="_blank">Luana Piovani estreou no Twitter</a> na quinta-feira (26) com declara&ccedil;&otilde;es apaixonadas ao novo namorado, Pedro.</p><p>_  "Eu mere&ccedil;o o Pedro depois de tudo que passei, nunca vi um menino t&atilde;o homem e um homem t&atilde;o doce e dedicado",escreveu Luana Piovani no Twitter.</p><p>"Agora n&atilde;o tem jeito... &Eacute; ele sim... Lindo, doce, apaixonado, surfista, tatuado, tarado, divertido e faz tudo por mim... Amo meu menino Pedro."  Mas antes disso (no final de semana) Luana Piovani quase leva uma sura.</p><p><img style="border: 0;" src="./images/luana-piovani-namorado.jpg" alt="Luana Piovani quase leva uma sura." /></p><p>se continuar assim n&atilde;o vai ter homem nesse Rioz&atilde;o de meu Deus pra andar a menos de 200 metros de voc&ecirc;, nega.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Sábado ,  28 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-28_01_52_39-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-28_01_52_39-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Luana Piovani estreou no Twitter&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-28_01_52_39-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-28_01_52_39-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-26_00_23_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0" rel="bookmark" title="Link permanente para Quem nunca comeu um rabo?">Quem nunca comeu um rabo?</a></h1>
+										<div align=left id=icon><small>Quinta-feira ,  26 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-26_00_23_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Quem nunca comeu um rabo?&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p>- "Quem nunca comeu um rabo n&atilde;o sabe o que t&aacute; perdendo" palavras de Ana Maria Braga</p><p><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="450" height="253" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/-JiiFKAtAdg&amp;theme=light" /><embed type="application/x-shockwave-flash" width="450" height="253" src="http://www.youtube.com/v/-JiiFKAtAdg&amp;theme=light" allowscriptaccess="always" allowfullscreen="true"></embed></object></p><p>Assim como Ana Maria tamb&eacute;m aprecio um bom rabo. :-)</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Quinta-feira ,  26 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-26_00_23_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-26_00_23_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Quem nunca comeu um rabo?&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-26_00_23_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-26_00_23_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-24_19_08_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0" rel="bookmark" title="Link permanente para Motivo de vergonha: A prisão de Pimenta Neves.">Motivo de vergonha: A prisão de Pimenta Neves.</a></h1>
+										<div align=left id=icon><small>Terça-feira ,  24 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-24_19_08_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Motivo de vergonha: A prisão de Pimenta Neves.&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="https://geanramos.zip.net.50x.com.br/images/prisao-Pimenta-Neves.jpg" alt="Foto: Motivo de vergonha: A pris&atilde;o de Pimenta Neves." width="400" height="225" /></p><p><br />A pris&atilde;o de Pimenta Neves n&atilde;o &eacute; motivo de comemora&ccedil;&atilde;o, mas de vergonha. Nossa Justi&ccedil;a &eacute; um esc&aacute;rnio. Quase onze anos para encarcerar um r&eacute;u confesso ? e poderoso.<br /><br />Conhecemos bem como funciona o C&oacute;digo Penal para quem tem dinheiro. &Eacute; um labirinto intermin&aacute;vel de recursos protelat&oacute;rios. S&oacute; a primeira das vinte manobras da defesa do jornalista demorou seis anos para tramitar.<br /><br />D&aacute; para ter certeza de que Pimenta Neves n&atilde;o cumprir&aacute; integralmente sua pena de 15 anos. E n&atilde;o ser&aacute; por sua idade avan&ccedil;ada, 74 anos. Ele vai ficar no m&aacute;ximo 24 meses preso.  Depois disso poder&aacute; entrar em regime semiaberto.<br /><br />Al&eacute;m de ser dif&iacute;cil colocar criminosos ricos na cadeia, &eacute; muito f&aacute;cil tir&aacute;-los de l&aacute;. Pris&atilde;o no Brasil &eacute; para pobre. Sempre foi assim. Nada indica que vai mudar.<br /><br />Talvez porque as leis neste pa&iacute;s sejam feitas por uma turma em boa parte formada por criminosos em atividade ou em potencial. Legislam em causa pr&oacute;pria, portanto. Sabem o que est&atilde;o fazendo.<br /><br />Toda tentativa de acelerar o sistema judici&aacute;rio esbarra em loobies muito fortes, financiados pelo crime organizado e articulada por sua tropa de elite parlamentar.<br /><br />O direito de defesa no Brasil se tornou uma aberra&ccedil;&atilde;o. Um ataque aos cidad&atilde;os honestos. Uma arma na m&atilde;o de criminosos. Uma vergonha.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Terça-feira ,  24 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-24_19_08_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-24_19_08_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Motivo de vergonha: A prisão de Pimenta Neves.&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-24_19_08_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-24_19_08_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-18_16_13_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0" rel="bookmark" title="Link permanente para Encontrado corpo de Liomar Resende">Encontrado corpo de Liomar Resende</a></h1>
+										<div align=left id=icon><small>Quarta-feira ,  18 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-18_16_13_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Encontrado corpo de Liomar Resende&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<div style="text-align: left;" dir="ltr"><img style="border: 0;" src="https://geanramos.zip.net.50x.com.br/images/liomar-resende3.jpg" alt="Encontrado corpo de Liomar Resende" width="400" height="225" /></div><div style="text-align: left;" dir="ltr">Mergulhadores do Corpo de Bombeiros encontraram a pouco, no rio Moju, no munic&iacute;pio de Breu Branco - PA, o  avi&atilde;o que estava  desaparecido desde s&aacute;bado,14. O piloto e dono da  aeronave, <a title="Foto de liomar resende" href="http://omadrugador.com/aeronave-sesna-210-cai-no-para.html/liomar-resende">Liomar  Resende</a>, e dois funcion&aacute;rios morreram no acidente. <br /><br />Os corpos das v&iacute;timas, foram achados dentro da cabine do avi&atilde;o, ser&atilde;o trazidos para Ulian&oacute;polis.<br /><br />A aeronave ? modelo Cessna C-210? foi localizada a aproximadamente 3,5  m de profundidade.<br /><br />O avi&atilde;o decolou na manha de s&aacute;bado, dia 14 de uma fazenda no munic&iacute;pio  de  Senador Jos&eacute; Porf&iacute;rio com destino a cidade de <a href="http://www.ulianopolis.com/">Ulianopolis</a>. Por volta das 11:30hs, a aeronave sumiu dos radares do <a title="Quarto centro integrado de defesa a&eacute;rea e controle de tr&aacute;fego a&eacute;reo" href="http://www.fab.mil.br/portal/capa/index.php?id=311&amp;page=mostra_catalogo">CINDACTA IV</a> Segundo os bombeiros, as &aacute;guas escuras do rio Moju dificultaram as   buscas.<br /><br />Objetos pessoais, duas portas e peda&ccedil;os das asas do avi&atilde;o foram   encontrados boiando no rio na ter&ccedil;a-feira.<br /><br />A causa do acidente est&aacute; sendo investigada pelo <a title="Servi&ccedil;o Regional de Investiga&ccedil;&atilde;o e Preven&ccedil;&atilde;o de Acidentes Aeron&aacute;uticos" href="http://www.fab.mil.br/portal/capa/index.php?nm_categoria=seripa&amp;page=categorias">Seripa</a>.</div><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Quarta-feira ,  18 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-18_16_13_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-18_16_13_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Encontrado corpo de Liomar Resende&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-18_16_13_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_16_13_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-18_13_06_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0" rel="bookmark" title="Link permanente para Que porre essa implicância com Sandy!">Que porre essa implicância com Sandy!</a></h1>
+										<div align=left id=icon><small> &raquo; <a href="#fb-comments-2011_05-18_13_06_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Que porre essa implicância com Sandy!&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="./images/sandy-devassa.jpg" alt="Que porre essa implic&acirc;ncia com Sandy!" /><br /><br />Mas que coisa essa implic&acirc;ncia com a Sandy. Nem quando est&aacute; certa d&atilde;o raz&atilde;o a ela.  Eu n&atilde;o vou perder uma oportunidade rara como essa.<br /><br />A mo&ccedil;a, sapeca como sempre, disse o que todo mundo que usa shampoo est&aacute; careca de saber: artistas fazem propaganda por dinheiro e n&atilde;o usam as marcas que divulgam.<br /><br />O erro da Sandy, <a href="http://goo.gl/sn1kS">foi citar como exemplo a Xuxa e o Luciano Huck</a>. Logo eles, minha flor? S&oacute; podia levar bordoada e sair perdendo. Coitada da menina.<br /><br />Os mais ass&iacute;duos frequentadores dos hor&aacute;rios comerciais evidentemente desmentiram a garota devassa. Juram que gostam dos produtos que anunciam e os tornam ainda mais ricos.<br /><br />Temos certeza disso, n&atilde;o &eacute;, pessoal?<br /><br />&Eacute; isso que d&aacute; jogar limpo, Sandy. O mundo dos neg&oacute;cios n&atilde;o premia a honestidade. Nunca mais v&atilde;o cham&aacute;-la pra fazer propaganda, nem de preservativo. Mas conte sempre comigo.<br /><br />E quanto ao fato dela n&atilde;o gostar de cerveja, que porre! Os fabricantes e os publicit&aacute;rios que a chamaram sabiam muito bem disso. Est&aacute; na carinha dela que &eacute; de iogurte pra baixo.<br /><br />Esses sabich&otilde;es, sim, deviam ser esculhambados. Estavam b&ecirc;bados quando escolheram a Sandy? Que safadeza.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em <br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-18_13_06_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-18_13_06_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Que porre essa implicância com Sandy!&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-18_13_06_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-18_13_06_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-17_00_30_32-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0" rel="bookmark" title="Link permanente para A procura">A procura</a></h1>
+										<div align=left id=icon><small>Terça-feira ,  17 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-17_00_30_32-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=A procura&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><em>N&atilde;o se trata de &ldquo;aonde&rdquo; chegar, mas &ldquo;como&rdquo;.</em><br /> <em>- To te achando estranha&hellip; o que houve?</em><br /> <em>- Ah, sei l&aacute;&hellip; to bem n&atilde;o.</em><br /> <em>- Mas por qu&ecirc;? Aconteceu alguma coisa?</em><br /> <em>- S&oacute; o de sempre&hellip; tudo a mesma merda =/</em><br /> <br /> Observo a conversa comum no chat.<br /> <br /> Quase sempre o &ldquo;de sempre&rdquo; &eacute; ter um emprego ruim, ou estar sem dinheiro, ou uma decep&ccedil;&atilde;o amorosa, ou por ter feito algo errado.<br /> <br /> Andei refletindo sobre a atitude negativa que essa amiga frequentemente apresenta&hellip;<br /> <br /> <strong>Voc&ecirc; j&aacute; deve ter assistido ao filme &ldquo;&Agrave; Procura da Felicidade&rdquo;, certo?</strong><br /> <br /> Caso n&atilde;o tenha assistido, para entender o sentido deste texto voc&ecirc; s&oacute; precisa saber que o filme conta a trajet&oacute;ria de <strong>Christopher Gardner</strong> (interpretado por Will Smith), <strong>um homem com problemas financeiros</strong> que passa a cuidar de seu filho de cinco anos sozinho, pois acaba de ser abandonado por sua mulher. Ele d&aacute; duro, faz al&eacute;m do poss&iacute;vel para se destacar em uma disputa n&atilde;o remunerada pelo emprego dos sonhos e ainda conseguir ser um bom pai, mesmo tendo que dormir com seu filho em abrigos e at&eacute; em uma esta&ccedil;&atilde;o do metr&ocirc;. Finalmente ele consegue o tal emprego e s&atilde;o felizes para sempre.<br /> <br /> Belo filme, boas atua&ccedil;&otilde;es, bom roteiro, toca o cora&ccedil;&atilde;o e te motiva.<br /> <br /> Por&eacute;m, por mais que tenha uma tem&aacute;tica bonita e positiva, me incomoda o fato da felicidade estar resumida no lado profissional/material.<br /> <em>A inten&ccedil;&atilde;o n&atilde;o &eacute; criticar o filme, apenas exemplifico o que muita gente tem implantado na cabe&ccedil;a.</em><br /> <br /> Para come&ccedil;ar, o que poderia melhorar era o pr&oacute;prio t&iacute;tulo: &ldquo;<strong>&Agrave; Procura da Felicidade</strong>&rdquo;.<br /> <br /> O t&iacute;tulo original do filme &eacute; &ldquo;<strong>The Pursuit of Happyness</strong>&rdquo;, que, em tradu&ccedil;&atilde;o livre, seria &ldquo;<strong>A Procura da Felicidade</strong>&rdquo;. Isso mesmo, sem crase. Mas qual a diferen&ccedil;a?<br /> <br /> Vamos l&aacute;, abra o cora&ccedil;&atilde;o: com &ldquo;&agrave; procura&rdquo;, <strong>com crase</strong>, prega-se que tentam chegar &agrave; tal felicidade, est&atilde;o ca&ccedil;ando-a, buscando algo que n&atilde;o se tem; j&aacute; se o t&iacute;tulo come&ccedil;asse com &ldquo;a procura&rdquo;, <strong>sem crase</strong>, a pr&oacute;pria procura seria o tema. :)<br /> <a href="./images/a-procura-da-felicidade.jpg"><img src="./images/a-procura-da-felicidade.jpg" border="0" alt="" /></a><br /> <strong>Will e Jaden Smith</strong><br /> <br /> <strong>N&atilde;o entendi. Porque seria melhor?</strong><br /> <br /> Ser&aacute; que n&atilde;o conseguindo o emprego, casa e/ou carro dos sonhos, n&atilde;o pode-se alcan&ccedil;ar a felicidade? Pior que isso: &ldquo;<strong>alcan&ccedil;ar</strong>&rdquo; &eacute; a palavra certa?<br /> <br /> Talvez o problema mencionado seja de interpreta&ccedil;&atilde;o, pois h&aacute; quem tenha assistido ao mesmo filme e que conseguiu entender que existia alegria, por exemplo, nos &ldquo;passeios&rdquo; cheios de pressa que Chris fazia com seu filho para chegar na hora certa nos abrigos.<br /> <br /> A felicidade <strong>n&atilde;o &eacute;</strong> &mdash;&#8202;ou n&atilde;o deveria ser&#8202;&mdash;&#8202;algo que se encontra ao final de uma longa jornada, como um pr&ecirc;mio ou b&ocirc;nus. Ela deve <strong>estar no caminho</strong> que te leva ao objetivo. Melhor, ela deve <strong>ser</strong> o caminho. A <strong>procura</strong> deve ser a pr&oacute;pria felicidade.<br /> <br /> N&oacute;s temos a mania feia de adiar nossa plenitude. N&oacute;s nos iludimos acreditando que, l&aacute; na frente, num futuro que ainda n&atilde;o podemos desenhar na imagina&ccedil;&atilde;o, todos os problemas estar&atilde;o resolvidos e, finalmente, poderemos <strong>viver intensamente</strong>.<br /> <br /> <strong><em>M&aacute;s not&iacute;cias, amigos</em></strong>: isso n&atilde;o existe! Se entrar nessa, nunca vai sair.<br /> <br /> Problemas te cercar&atilde;o durante toda sua vida, independente de sua situa&ccedil;&atilde;o financeira ou do pa&iacute;s onde voc&ecirc; for morar. A forma como voc&ecirc; os encara &eacute; que vai fazer a diferen&ccedil;a. E acredite, sua vida seria bem sem gra&ccedil;a e vazia se eles n&atilde;o existissem.<br /> <br /> Voc&ecirc; pode ser feliz sem ter a casa que sempre sonhou, sem ter o carro que sempre se imaginou dirigindo, sem ter o emprego que te fa&ccedil;a acordar com um sorriso no rosto &agrave;s segundas.<br /> <br /> N&atilde;o estou dizendo que voc&ecirc; n&atilde;o deve ter ambi&ccedil;&otilde;es e objetivos, muito pelo contr&aacute;rio, voc&ecirc; deve sim. Fazer planos &eacute; o que mant&eacute;m a sua mente jovem. O que quero dizer &eacute; que o fato de concretizar suas ambi&ccedil;&otilde;es n&atilde;o &eacute; sin&ocirc;nimo de felicidade plena. Se voc&ecirc; n&atilde;o for feliz por si s&oacute;, n&atilde;o h&aacute; conquista, nem outra pessoa, que o far&aacute;.<br /> <br /> No filme &ldquo;A Volta do Todo Poderoso&rdquo;, Morgan Freeman&#8202;&mdash;&#8202;interpretando Deus&#8202;&mdash;&#8202;discursa o seguinte:<br /> <br /> <em>Se algu&eacute;m pedir paci&ecirc;ncia, acha que receber&aacute; paci&ecirc;ncia ou a oportunidade de ser paciente ?</em><br /> <em>Se pedimos coragem, Deus dar&aacute; coragem ou oportunidade de sermos corajosos ?</em><br /> <em>Se algu&eacute;m pede que a fam&iacute;lia seja mais unida, acha que Deus une a fam&iacute;lia com amor e alegria ou d&aacute; &agrave; eles a oportunidade de se amar?</em><br /> <br /> Independente de religi&atilde;o, isso &eacute; bem verdade. Muita coisa depende de uma mudan&ccedil;a interna e n&atilde;o de um &ldquo;milagre&rdquo;.<br /> <br /> A felicidade est&aacute; no simples, nos detalhes. Est&aacute; no vento fresco em um dia de calor, na gargalhada de uma crian&ccedil;a (ainda mais se foi voc&ecirc; quem a provocou), no al&iacute;vio de chegar em casa e tirar os sapatos, no primeiro peda&ccedil;o da sua sobremesa favorita, no cheiro de chuva, na conversa sem pressa com os amigos, no aprendizado de alguma coisa dif&iacute;cil&hellip;ou ao ver esta foto:<br /> <a href="./images/grito-rock-belem.jpg"><img src="./images/grito-rock-belem.jpg" border="0" alt="" /></a> <br /> Voc&ecirc; pode ter dias ruins, todos temos. Mas que voc&ecirc; lembre-se destes exatamente assim, como dias ruins e n&atilde;o como um dia comum.<br /> <br /> &nbsp;&nbsp;&nbsp; Seja feliz. :-)</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Terça-feira ,  17 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-17_00_30_32-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-17_00_30_32-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=A procura&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-17_00_30_32-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-17_00_30_32-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-15_19_20_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0" rel="bookmark" title="Link permanente para Busca por avi&atilde;o monomotor que caiu no Par&aacute; &eacute; paralisada">Busca por avi&atilde;o monomotor que caiu no Par&aacute; &eacute; paralisada</a></h1>
+										<div align=left id=icon><small>Domingo ,  15 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-15_19_20_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Busca por avi&atilde;o monomotor que caiu no Par&aacute; &eacute; paralisada&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="margin-left: auto; margin-right: auto;" src="./images/cesna-210.jpg" alt="" /></p><p><strong>Modelo da aeronave que caiu. </strong><br /><br />O Corpo de Bombeiros do Par&aacute; e a Aeron&aacute;utica encerraram no in&iacute;cio da noite deste domingo temporariamente as buscas do monomotor que caiu no munic&iacute;pio de Breu Branco(PA) ontem.</p><p>A chuva e a falta de ilumina&ccedil;&atilde;o for&ccedil;aram as equipe do I Servi&ccedil;o Regional de Investiga&ccedil;&atilde;o e Preven&ccedil;&atilde;o de Acidentes Aeron&aacute;uticos (Seripa) e dos bombeiros a interromperem o trabalho neste domingo.</p><p>As buscas continuar&atilde;o na manha de segunda-feira.<br /><br />O monomotor caiu na localidade de Boa Esperan&ccedil;a, pequena vila de pescadores e agricultores de Breu Branco, distante cerca de 30 km de Tucuru&iacute;.</p><p>O avi&atilde;o seguia de Senador Jos&eacute; Porf&iacute;rio, na regi&atilde;o da Transamaz&ocirc;nica, para o munic&iacute;pio de Ulian&oacute;polis e presume-se que caiu no final da manh&atilde; de s&aacute;bado na regi&atilde;o de Breu Branco, em local de dif&iacute;cil acesso rodeado de mata e rios.<br /><br />O major do Corpo de Bombeiros, Elton Moraes, que comanda a opera&ccedil;&atilde;o, confirmou que havia tr&ecirc;s tripulantes no avi&atilde;o, mas at&eacute; o encerramento das buscas nenhum deles havia sido encontrado.<br /><br />O Seripa mant&eacute;m um helic&oacute;ptero no local do acidente.</p><p>Durante o dia os bombeiros do Par&aacute; procuram as v&iacute;timas com uma equipe de cinco mergulhadores e outros dez militares, especializados em buscas em locais de dif&iacute;cil acesso.<br /><br />Moradores da localidade afirmam que encontraram peda&ccedil;os das portas do avi&atilde;o no Rio Moju.<br /><br />As chances dos tripulantes serem encontrados com vida s&atilde;o remotas, segundo o major que comanda a opera&ccedil;&atilde;o.</p><p>No entanto, ele afirma que como n&atilde;o se sabe ao certo como foi o acidente, ainda h&aacute; esperan&ccedil;as de que os tripulantes possam ter sobrevivido.<br /><br />Na tarde deste domingo o Seripa enviou de Bel&eacute;m o suboficial Renato Alc&acirc;ntara para Breu Branco, onde dever&aacute; acompanhar as buscas at&eacute; o final da opera&ccedil;&atilde;o.<br /><br />Ele informou que o Comando da Aeron&aacute;tica (Comaer) ir&aacute; enviar de Manaus (AM) uma equipe para ajudar no trabalho de buscas e resgate das v&iacute;timas.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Domingo ,  15 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-15_19_20_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-15_19_20_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Busca por avi&atilde;o monomotor que caiu no Par&aacute; &eacute; paralisada&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-15_19_20_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-15_19_20_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-14_20_02_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0" rel="bookmark" title="Link permanente para Não quero assim...">Não quero assim...</a></h1>
+										<div align=left id=icon><small>Sábado ,  14 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-14_20_02_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Não quero assim...&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="./images/nao-quero-assim.jpg" alt="N&atilde;o quero assim..." /></p><p><br /> N&atilde;o quero que finja sentimentos por mim.</p><p>N&atilde;o aceito que segure a minha  m&atilde;o se tem inten&ccedil;&atilde;o de solta-la.</p><p>S&oacute; quero o que for verdadeiro.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Sábado ,  14 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-14_20_02_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-14_20_02_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Não quero assim...&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-14_20_02_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-14_20_02_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-13_12_52_37-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0" rel="bookmark" title="Link permanente para Neymar não soube driblara a 'perereca'">Neymar não soube driblara a 'perereca'</a></h1>
+										<div align=left id=icon><small>Sexta-feira ,  13 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-13_12_52_37-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Neymar não soube driblara a 'perereca'&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="./images/neymar-papai.jpg" alt="Neymar Papai" /></p><p>@<a class="  twitter-atreply" rel="nofollow" href="http://twitter.com/MarceloTas">MarceloTas</a> Neymar sabe driblar zagueiros mas n&atilde;o conseguiu conter a explos&atilde;o de "ferom&ocirc;nios"</p><p>A internet tem sido o term&ocirc;metro da repercuss&atilde;o da paternidade de  Neymar, divulgada nesta quinta-feira. Pelo Twitter, a maioria demonstrou  surpresa, mas muitos tamb&eacute;m tiveram bom humor para bolar piadas,  inclusive alguns profissionais da imprensa.</p><p>As f&atilde;s, por&eacute;m, n&atilde;o  escondem a decep&ccedil;&atilde;o pelo futuro filho do astro santista com uma  garota de 17 anos de idade.</p><p>Enquanto permanece o mist&eacute;rio sobre a identidade da garota de 17 anos, que deve dar &agrave; luz ao beb&ecirc; de Neymar em setembro, os coment&aacute;rios continuam no twitter. <br />Confira alguns dos melhores.</p><p><a href="http://twitter.com/xicosa" target="_blank">@xicosa</a>: Bar&ccedil;a e Real disputam passe do filho de Neymar (Xico S&aacute;, colunista da Folha de S&atilde;o Paulo).</p><p><a href="http://twitter.com/hoorlando" target="_blank">@hoorlando</a>: esse Neymar vai ser pai? quem manda querer jogar sem camisa.</p><p><a href="http://twitter.com/perinperin" target="_blank">@perinperin</a>: Jontex essi &eacute; o craque Neymar&hellip;Neymar essa &eacute; Jontex!!!! =) agora pode brinca.</p><p><span class="tweet-user-name"><a class="tweet-screen-name user-profile-link" title="Gean Ramos" href="http://twitter.com/geanramos">@geanramos</a></span>: A menina de17 anos chega para a m&atilde;e em casa e fala: 'm&atilde;e eu to gr&aacute;vida' 'SUA VAGABUNDA!''o pai e o Neymar' 'sua linda'</p><div class="tweet-text"><div class="tweet-text"><span class="tweet-user-name"> <a class="tweet-screen-name user-profile-link" title="Amanda Wanderley" href="http://twitter.com/amandawy">amandawy</a>: </span>A loja m&oacute;veis e artigos para  beb&ecirc;s, vizinha aqui de casa, est&aacute; vendendo chupetas incrustadas com  cristais swarovsky por R$ 175,00!!!!</div><div class="tweet-text"><br /></div><div class="tweet-text"><span class="tweet-user-name"><a class="tweet-screen-name user-profile-link" title="O Madrugador" href="http://twitter.com/omadrugador">omadrugador</a>:</span> Quem j&aacute; engravidou uma menina de 17 anos d&aacute; RT!</div></div><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Sexta-feira ,  13 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-13_12_52_37-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-13_12_52_37-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Neymar não soube driblara a 'perereca'&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-13_12_52_37-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-13_12_52_37-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-12_19_34_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0" rel="bookmark" title="Link permanente para Vai dar piti: Kit gay do MEC ">Vai dar piti: Kit gay do MEC </a></h1>
+										<div align=left id=icon><small>Quinta-feira ,  12 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-12_19_34_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Vai dar piti: Kit gay do MEC &tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="./images/Kit-gay-do-MEC.gif" alt="Vai dar piti: Kit gay do MEC " /><br /><br />Basta as coisas estarem indo bem que aparece algum burocrata para estragar tudo. O pessoal do MEC est&aacute; querendo transformar a homossexualidade em uma coisa chata. Orienta&ccedil;&atilde;o sexual vai virar disciplina!<br /><br />S&oacute; pode ser sabotagem. Cismaram que precisa debater em sala de aula a vida privada das pessoas. E criaram o kit gay para o ensino m&eacute;dio.<br /><br />S&atilde;o tr&ecirc;s v&iacute;deos (<a href="http://youtu.be/TEcra9BBOdg" target="_blank">Probabilidade</a>, <a href="http://youtu.be/TP_OjE_Fi2o" target="_blank">Torpedo</a>, <a href="http://youtu.be/fVGSrP-W3OM" target="_blank">Encontrando Bianca</a> )e um guia de orienta&ccedil;&atilde;o para professores ensinarem transexualidade, bissexualidade e demais manifesta&ccedil;&otilde;es ?homoafetivas?. Que porre deve ser...<br /><br />Num dos filmes, contam a hist&oacute;ria de um casal de meninas l&eacute;sbicas. <a title="Primeiro beijo gay da tv brasileira" href="#2011_05-10_20_36_59-114134954-0" target="_self">J&aacute; tem um monte de novelas fazendo isso</a>. Carecia n&atilde;o.<br /><br />Isso n&atilde;o &eacute; ensinar toler&acirc;ncia, &eacute; incitar preconceito. N&atilde;o vale a pena pagar pra ver.<br /><br />Piada pronta, al&eacute;m de muni&ccedil;&atilde;o para almas mais conservadoras. Jair Bolsonaro agradece, ao CQC e ao MEC. Que seria dele sem pessoas e ideias est&uacute;pidas?<br /><br />Menos, menos. Isso n&atilde;o vai ser bom para ningu&eacute;m. &Eacute; o mesmo que ensinar religi&atilde;o nas escolas. Sou contra. N&atilde;o somos um Estado laico? Pois ent&atilde;o. Tamb&eacute;m n&atilde;o quero que deem aulas de ate&iacute;smo. Quero que me deixem em paz. S&oacute; isso.<br /><br />O racioc&iacute;nio &eacute; simples: o Estado n&atilde;o tem que se meter na vida das pessoas. Cada um cuida da sua. N&atilde;o precisamos que desenhem na lousa as nossas intimidades.<br /><br />A escola j&aacute; est&aacute; sobrecarregada de tarefas, e n&atilde;o cumpre nenhuma a contento. Que tal devolvermos aos pais alguma responsabilidade na forma&ccedil;&atilde;o de jovens e crian&ccedil;as?<br /><br />&Eacute; de dar calafrios imaginar um professor mal preparado discutindo um assunto desses. E jovens entediados, recebendo informa&ccedil;&otilde;es que dizem respeito a uma minoria que s&oacute; precisa passar despercebida na multid&atilde;o. Como gente normal, sabe?<br /><br />Muito mais &uacute;til seria dar refor&ccedil;os em matem&aacute;tica e portugu&ecirc;s. Nesses quesitos, sim, temos problemas graves. E os resultados t&ecirc;m sido indecentes.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Quinta-feira ,  12 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-12_19_34_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-12_19_34_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Vai dar piti: Kit gay do MEC &tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-12_19_34_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-12_19_34_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-10_20_36_59-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0" rel="bookmark" title="Link permanente para Primeiro beijo gay da tv brasileira">Primeiro beijo gay da tv brasileira</a></h1>
+										<div align=left id=icon><small>Terça-feira ,  10 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-10_20_36_59-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Primeiro beijo gay da tv brasileira&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="./images/beijo-gay-no-sbt.jpg" alt="primeiro beijo gay da tv brasileira. vai ser no SBT" /></p><p>Amanh&atilde;, quarta-feira (11), o SBT o primeiro beijo gay na televis&atilde;o. <br />N&atilde;o ser&aacute; entre homens, como a maioria espera, mas j&aacute; ser&aacute; dado um grande passo para que outros beijos sejam dados.<br />A cena do beijo acontece com as personagens Marcela e Marina, interpretadas pelas atrizes <a href="http://www.lucianavendramini.com.br/" target="_blank">Luciana Vendramini</a> e <a href="https://www.google.com.br/search?q=Gisele+tigre" target="_blank">Gisele Tigre</a> respectivamente, em "amor &amp; revolu&ccedil;&atilde;o".<br />No <a href="http://www.twitter.com/gloriafperez" target="_blank">Twitter</a> a autora <a href="http://gloriafperez.org/" target="_blank">Gloria Perez</a> elogiou o autor da novela, <a href="http://www.tiagosantiago.com.br/" target="_blank">Tiago Santiago</a>.<br />- ontem me perguntaram sobre o que achei do beijo gay na novela do SBT: achei &oacute;timo q o tabu tenha sido quebrado! Parab&eacute;ns ao Tiago! :-)<br />Gloria j&aacute; teve um beijo gay vetado pela globo na novela "<a href="http://america.globo.com/" target="_blank">Am&eacute;rica</a>", de sua autoria que foi ao ar em 2005 no hor&aacute;rio nobre.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Terça-feira ,  10 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-10_20_36_59-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-10_20_36_59-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Primeiro beijo gay da tv brasileira&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-10_20_36_59-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_20_36_59-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-10_03_36_05-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0" rel="bookmark" title="Link permanente para Seu chefe pode descobrir, mentira tem perna curta">Seu chefe pode descobrir, mentira tem perna curta</a></h1>
+										<div align=left id=icon><small> &raquo; <a href="#fb-comments-2011_05-10_03_36_05-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Seu chefe pode descobrir, mentira tem perna curta&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="https://geanramos.zip.net.50x.com.br/images/verdade-mentira.jpg" alt="Seu chefe pode descobrir, mentira tem perna curta" /></p><p>Hoje voc&ecirc; n&atilde;o t&aacute; a fim de trabalhar e ligou para o chefe dizendo que est&aacute; passando mal.</p><p>Ou ent&atilde;o inventa que vai levar o filho ao m&eacute;dico para participar de um processo seletivo.</p><p>&Eacute; bastante comum que as pessoas busquem justificativas quando pretendem faltar no emprego ou arrumem desculpas se est&atilde;o procurando outro emprego.</p><p>Uma mentirinha de nada que n&atilde;o vai afetar sua imagem na empresa, certo? Errado.<br /><br />Nem sempre o chefe acredita nas tradicionais desculpas esfarrapadas dadas por seus subordinados.</p><p>Se elas acontecem de forma espor&aacute;dica, certamente voc&ecirc; n&atilde;o ter&aacute; problema.</p><p>Agora, se s&atilde;o frequentes, fique atento. Quando o chefe escuta raz&otilde;es diferentes para justificar um determinado problema ou a pessoa passa horas tentando se justificar, o sinal amarelo da desconfian&ccedil;a acende para o chefe.<br /><br />Por isso, tome cuidado. Reflita: vale a pena correr risco por a&ccedil;&otilde;es impensadas? Pense se realmente vale a pena mentir por bobagem.</p><p>Buscar uma oportunidade melhor no mercado n&atilde;o est&aacute; errado, mas tente marcar entrevistas antes ou depois do hor&aacute;rio do expediente. N&atilde;o esque&ccedil;a que quanto mais voc&ecirc; chegar atrasado ou faltar por quest&otilde;es pessoais, quando de fato voc&ecirc; tiver um problema ser&aacute; mais dif&iacute;cil seu chefe acreditar.</p><p><del>Tomara que meu chefe n&atilde;o leia este blog se n&atilde;o estou na rua.</del></p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em <br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-10_03_36_05-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-10_03_36_05-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Seu chefe pode descobrir, mentira tem perna curta&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-10_03_36_05-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-10_03_36_05-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-08_21_42_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0" rel="bookmark" title="Link permanente para EGO Fail: Ariadina estilo 'burro chic'">EGO Fail: Ariadina estilo 'burro chic'</a></h1>
+										<div align=left id=icon><small>Domingo ,  08 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-08_21_42_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=EGO Fail: Ariadina estilo 'burro chic'&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="./images/ariadina-borro-chic.jpg" alt="Ariadina - borro chic" /><br /><br />A gente adorou que a Ariadna contratou uma personal stylist pra aconselh&aacute;-la a se produzir.<br /><br /><br />Mas da&iacute; pensando melhor a gente acha que ela tem que demitir a stylist e contratar <a href="http://ego.globo.com/Gente/Fotos/0,,GF86248-9801,00-EXBBB+ARIADNA+MUDA+O+GUARDAROUPA.html#fotogaleria=6">o redator do Ego</a>, que definiu perfeitamente o estilo da ex-BBB. Que <a href="http://goo.gl/rx2bT">boho chic</a> que nada.<br /><br />A gente aqui tamb&eacute;m se borrou. Mas n&atilde;o foi muito chique n&atilde;o.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Domingo ,  08 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-08_21_42_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-08_21_42_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=EGO Fail: Ariadina estilo 'burro chic'&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-08_21_42_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_21_42_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-08_20_42_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0" rel="bookmark" title="Link permanente para Zeca Camargo exibe pancinha de respeito">Zeca Camargo exibe pancinha de respeito</a></h1>
+										<div align=left id=icon><small> &raquo; <a href="#fb-comments-2011_05-08_20_42_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Zeca Camargo exibe pancinha de respeito&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="./images/zecacamargo.jpg" alt="Zeca Camargo exibe pancinha de respeito" /><br /><br />Zeca Camargo, que participa de um quadro de dietas no 'Fant&aacute;stico', malhou na Lagoa Rodrigo de Freitas.<br /><br /><br /><br />Ele est&aacute; tentando, mas parece que ainda vai ter que suar bastante...<br /><br />Zeca Camargo, que junto com Renata Ceribelli encarou o desafio do "Fant&aacute;stico" de emagrecer.<br /><br />e <a href="http://ego.globo.com/Gente/Noticias/0,,MUL1661398-9798,00-ZECA+CAMARGO+FAZ+EXERCICIOS+NO+RIO+MAS+EXIBE+PANCINHA+DE+RESPEITO.html">exibiu uma pancinha de respeito</a>. Voc&ecirc; chega l&aacute;, Zeca!</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em <br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-08_20_42_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-08_20_42_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Zeca Camargo exibe pancinha de respeito&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-08_20_42_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_20_42_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-08_19_48_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0" rel="bookmark" title="Link permanente para É os estagiários atacam novamente.">É os estagiários atacam novamente.</a></h1>
+										<div align=left id=icon><small> &raquo; <a href="#fb-comments-2011_05-08_19_48_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=É os estagiários atacam novamente.&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p>Feriado &eacute; uma tristeza, todo mundo trabalhando de m&aacute; vontade e as reda&ccedil;&otilde;es viram aquela festa, uns pecando por excesso de aten&ccedil;&atilde;o, outros por falta.<br /><br />Neste feriado, o que recebe de email com erro do Ego, da Caras, do Uol, n&atilde;o tava escrito.Como &eacute; dia das M&atilde;es, resolvemos deixar o Ego em paz e falar dos outros apenas.</p><p><br /><img style="border: 0;" src="https://geanramos.zip.net.50x.com.br/images/michele-obama.jpg" alt="O Obama ta sabendo disso, Aguinaldo" width="400" height="225" /></p><p>O <a href="http://www.google.com.br/search?hl=pt-BR&amp;client=firefox-a&amp;hs=Tdd&amp;rls=org.mozilla:pt-BR:official&amp;tbm=isch&amp;q=barack+obama&amp;revid=112034088&amp;sa=X&amp;ei=W23HTZfSIoSftweZmKSsBA&amp;ved=0CDIQ1QIoAA&amp;biw=1024&amp;bih=578" target="_blank">Obama</a> ta sabendo disso, <a href="http://www.google.com.br/search?hl=pt-BR&amp;client=firefox-a&amp;hs=QwI&amp;rls=org.mozilla%3Apt-BR%3Aofficial&amp;biw=1024&amp;bih=578&amp;tbm=isch&amp;sa=1&amp;q=aguinaldo+silva&amp;oq=aguinaldo+silva&amp;aq=f&amp;aqi=g1&amp;aql=&amp;gs_sm=e&amp;gs_upl=12030l12030l0l1l1l0l0l0l0l477l477l4-1" target="_blank">Aguinaldo?</a><br /><br /><img style="border: 0;" src="https://geanramos.zip.net.50x.com.br/images/gisele-a-direita.jpg" alt="jura que a Gisele &eacute; a da direita?" width="400" height="225" /></p><p>Voc&ecirc; jura que a Gisele &eacute; a da direita? QUE BOM QUE EXISTE LEGENDA, n&atilde;o &eacute; verdade, <a href="http://click.uol.com.br/?rf=barrageral&amp;u=http://www.uol.com.br/" target="_blank">UOL</a><br /><br />Com votos de Feliz Dia das M&atilde;es, beijo pros colegas que se Fodem no plant&atilde;o.<br /><em><br />(Valeu, Iris e Carolina)</em></p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em <br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-08_19_48_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-08_19_48_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=É os estagiários atacam novamente.&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-08_19_48_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_19_48_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-08_11_34_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0" rel="bookmark" title="Link permanente para Feliz Dia das Mães">Feliz Dia das Mães</a></h1>
+										<div align=left id=icon><small> &raquo; <a href="#fb-comments-2011_05-08_11_34_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Feliz Dia das Mães&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p>Segundo domingo de maio, o Ego e todos os sites de fofoca s&oacute; fotografando as m&atilde;es e sua prole, mas voc&ecirc; n&atilde;o tem filhos. Como proceder? <a href="http://ego.globo.com/Gente/Noticias/0,,MUL1661329-9798,00-NICOLE+BAHLS+LEVA+A+SOBRINHA+A+PRAIA+NO+RIO.html">Nicole Bahls</a> ensina:<br /><img src="https://geanramos.zip.net.50x.com.br/images/nicole-ensina.jpg" alt="Nicole Bahls ensina" /><br />Pegue um beb&ecirc; emprestado e corra para o Leblon. Ponto extra se usar&nbsp;biqu&iacute;ni&nbsp;combinandinho com a crian&ccedil;a. <br />Detalhe n&atilde;o esque&ccedil;a de <a href="https://twitter.com/EuNicoleBahls" target="_blank">avisar no twitter n&atilde;o e mesmo Nicole</a></p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em <br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-08_11_34_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-08_11_34_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Feliz Dia das Mães&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-08_11_34_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-08_11_34_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-07_13_45_32-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0" rel="bookmark" title="Link permanente para Manual para entender as mulheres - Vol: 01">Manual para entender as mulheres - Vol: 01</a></h1>
+										<div align=left id=icon><small>Sábado ,  07 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-07_13_45_32-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Manual para entender as mulheres - Vol: 01&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p>Com muita satisfa&ccedil;&atilde;o informamos que j&aacute; esta dispon&iacute;vel o primeiro volume do "Manual para entender as mulheres".</p><p><img style="border: 0;" src="https://geanramos.zip.net.50x.com.br/images/manual-entender-mulheres.jpg" alt="Manual para entender as mulheres - Vol: 01" width="400" height="528" /></p><p>Manual para entender as mulheres: finalmente saiu o vol.: 01 de 100.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Sábado ,  07 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-07_13_45_32-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-07_13_45_32-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Manual para entender as mulheres - Vol: 01&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-07_13_45_32-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_13_45_32-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-07_02_01_03-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0" rel="bookmark" title="Link permanente para Mark Zuckerberg saiu do aluguel, finalmente...">Mark Zuckerberg saiu do aluguel, finalmente...</a></h1>
+										<div align=left id=icon><small> &raquo; <a href="#fb-comments-2011_05-07_02_01_03-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Mark Zuckerberg saiu do aluguel, finalmente...&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img src="./images/casanova.gif" alt="Casa nova de Mark Zuckerberg" /></p><p>Bilion&aacute;rio Mark Zuckerberg sai do aluguel e compra mans&atilde;o de US$ 7 milh&otilde;es</p><p>&Eacute; dif&iacute;cil acreditar que um bilion&aacute;rio com fortuna estimada em US$ 13,5 bilh&otilde;es more de aluguel</p><p>mas bilion&aacute;rios s&atilde;o mesmo exc&ecirc;ntricos.</p><p>Mark Zuckerberg, cofundador do Facebook, morou anos e anos em casas alugadas e s&oacute; agora decidiu comprar sua primeira casa (pouco antes de completar 27 anos, no dia 14 de maio). A mans&atilde;o acima fica em Palo Alto, a dez minutos de carro do novo escrit&oacute;rio do Facebook em Melon Park, Calif&oacute;rnia.</p><p>Segundo a ''<a href="http://blogs.forbes.com/morganbrennan/2011/05/06/facebook-mark-zuckerberg-buys-palo-alto-home/">Forbes</a>'', a casa est&aacute; avaliada em US$ 7 milh&otilde;es</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em <br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-07_02_01_03-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-07_02_01_03-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Mark Zuckerberg saiu do aluguel, finalmente...&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-07_02_01_03-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-07_02_01_03-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-06_22_50_17-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0" rel="bookmark" title="Link permanente para Ponto de vista">Ponto de vista</a></h1>
+										<div align=left id=icon><small>Sexta-feira ,  06 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-06_22_50_17-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Ponto de vista&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p>Pra voc&ecirc; ver que tudo, absolutamente tudo &eacute; relativo, &eacute; s&oacute; olhar essa foto e entender como um s&oacute; pensamento pode causar rea&ccedil;&otilde;es t&atilde;o diferentes em cada pessoa. Na foto <strong>do Ego</strong>, por exemplo, a palavra-chave &eacute;: <strong>picanha</strong></p><p><img style="border: 0;" src="https://geanramos.zip.net.50x.com.br/images/paula3.jpg" alt="ponto de vista - paulinha" width="400" height="225" /></p><p>...t&aacute; claro que Paulinh&atilde;o t&aacute; pensando em uma bela carne mal-passada e a palavra que acompanha o pensamento &eacute; "Hmmmmmmmmm". E tamb&eacute;m t&aacute; claro que a fisioterapeuta tamb&eacute;m t&aacute; pensando a mesma coisa... mas as palavras que acompanham o pensamento &eacute; "Nunca mais como carne com gordura".</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Sexta-feira ,  06 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-06_22_50_17-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-06_22_50_17-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Ponto de vista&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-06_22_50_17-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_50_17-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-06_22_31_18-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0" rel="bookmark" title="Link permanente para Jack Bauer matou Bin Laden">Jack Bauer matou Bin Laden</a></h1>
+										<div align=left id=icon><small> &raquo; <a href="#fb-comments-2011_05-06_22_31_18-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Jack Bauer matou Bin Laden&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="./images/jack-bauer-24.jpg" alt="Jack Bauer matou Bin Laden" /></p><p>Sou f&atilde; de Jack Bauer, do seriado <em>24 Horas</em>. Suas oito temporadas s&atilde;o uma aut&oacute;psia da alma do imp&eacute;rio americano, um desnudamento implac&aacute;vel, a sangue frio.<br /><br />Sintomaticamente, a s&eacute;rie estreou dois meses ap&oacute;s o ataque de 11 de setembro. E ficou no ar tempo suficiente para os EUA invadirem o Iraque e o Afeganist&atilde;o. A vida e a arte se estranharam. E se entranharam.<br /><br />Muitos dizem que <em>24 Horas</em> &eacute; uma obra hiper-reacion&aacute;ria, uma apologia ao esp&iacute;rito b&eacute;lico da Am&eacute;rica imperialista. Discordo: &eacute; uma cr&iacute;tica feroz a tudo isso, sem perd&atilde;o.<br /><br />A f&uacute;ria patri&oacute;tica de Jack Bauer &eacute; um tratado &eacute;tico, principalmente sobre o uso da tortura como m&eacute;todo &ldquo;leg&iacute;timo&rdquo; de investiga&ccedil;&atilde;o e combate ao terrorismo.<br /><br />Afogamentos, dedos amputados, choques el&eacute;tricos, dores lancinantes e outras barbaridades, tudo era tolerado (e se mostrava muito eficiente) na defesa dos interesses da na&ccedil;&atilde;o.<br /><br />Algu&eacute;m a&iacute; duvida que &eacute; dessa forma que agem todas as pol&iacute;cias, ex&eacute;rcitos e ag&ecirc;ncias de espionagem (ironicamente chamados de &ldquo;servi&ccedil;os de intelig&ecirc;ncia&rdquo;)? Eu n&atilde;o.<br /><br />A novidade &eacute; o governo de Barack Obama vir a p&uacute;blico e despudoradamente assumir que faz uso de &ldquo;m&eacute;todos refor&ccedil;ados de interrogat&oacute;rio&rdquo;. Contra terroristas, m&eacute;todos aterrorizantes. Na cara dura.<br /><br />Guerra &eacute; guerra, muitos dir&atilde;o. E chamar&atilde;o de ing&ecirc;nuos os que lembrarem que leis internacionais (assinadas pelos EUA, diga-se de passagem) pro&iacute;bem o uso da viol&ecirc;ncia para obter confiss&otilde;es.<br /><br />Estou entre esses imbecis que julgam a tortura a manifesta&ccedil;&atilde;o mais baixa e atroz da nossa lament&aacute;vel condi&ccedil;&atilde;o humana. Mas continuo f&atilde; de her&oacute;is tr&aacute;gicos e atormentados.<br /><br />Retrato definitivo de uma era, Jack Bauer matou Bin Laden. Simbolicamente, &eacute; claro. Porque, no seriado, o justiceiro n&atilde;o teria sido t&atilde;o covarde.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em <br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-06_22_31_18-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-06_22_31_18-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Jack Bauer matou Bin Laden&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-06_22_31_18-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-06_22_31_18-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-05_19_22_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0" rel="bookmark" title="Link permanente para Vai atrasar? Não invente desculpas">Vai atrasar? Não invente desculpas</a></h1>
+										<div align=left id=icon><small>Quinta-feira ,  05 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-05_19_22_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Vai atrasar? Não invente desculpas&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="./images/vai-atrasar.jpg" alt="Vai atrasar? N&atilde;o invente desculpas" /></p><p>Pontualidade &eacute; um tema recorrente da rela&ccedil;&atilde;o entre as pessoas. Dizem que os ingleses s&atilde;o o povo mais pontual que existe do mundo. Quem nunca ouviu falar da famosa pontualidade inglesa? Por outro lado, os brasileiros s&atilde;o conhecidos como os mais impontuais. Minha experi&ecirc;ncia indica que isso &eacute; verdade. O brasileiro &eacute; impontual sim, o brasileiro n&atilde;o respeita o hor&aacute;rio marcado. E o que &eacute; pior, mente.<br /><br />Alega uma s&eacute;rie de dificuldades que n&atilde;o aconteceram, porque simplesmente acordou mais tarde. Ou ent&atilde;o, com pregui&ccedil;a de chegar na hora, acha que tinha o direito de chegar atrasado. Um grande absurdo! Outra coisa que observo, quanto mais importante for o cargo hier&aacute;rquico da pessoa, mais ela se julga no direito de chegar atrasado. A pontualidade mostra o respeito em rela&ccedil;&atilde;o &agrave; pessoa, mostra o seu car&aacute;ter, mostra que voc&ecirc; leva em considera&ccedil;&atilde;o o tempo das pessoas.<br /><br />Quer uma dica? Vai chegar atrasado porque aconteceu um acidente com o motoboy, o carro engui&ccedil;ou ou o &ocirc;nibus quebrou, ligue pra pessoa e diga: - Vou atrasar porque houve um acidente aqui. Se esse atraso durar mais de 15 minutos, fa&ccedil;a uma proposta: - Se voc&ecirc; n&atilde;o puder esperar, n&atilde;o tem problema. Marque outro dia mais conveniente. Ah, pe&ccedil;a sempre desculpas, porque o hor&aacute;rio marcado &eacute; um compromisso, como pagar uma conta no banco. Voc&ecirc; paga a conta atrasado? Se sim, vai pagar juros.<br /><br />O atraso e a impontualidade tamb&eacute;m devem implicar em penalidade. E sabe qual &eacute; essa penalidade? A sua imagem, a imagem de <a href="https://geanramos.zip.net.50x.com.br/arch2010-12-26_2011-01-01.html#2010_12-26_18_20_00-114134954-0" target="_self">uma pessoa que n&atilde;o respeita os outros</a>. Quem n&atilde;o respeita os outros, consequentemente, n&atilde;o &eacute; confi&aacute;vel. Se n&atilde;o &eacute; confi&aacute;vel, n&atilde;o pode ter uma rela&ccedil;&atilde;o profissional. Portanto, se voc&ecirc; &eacute; impontual perca esse vicio e passe a ser uma pessoa que respeite o hor&aacute;rio dos outros. Respeitando o hor&aacute;rio dos outros, voc&ecirc; tamb&eacute;m ser&aacute; respeitado.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Quinta-feira ,  05 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-05_19_22_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-05_19_22_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Vai atrasar? Não invente desculpas&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-05_19_22_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-05_19_22_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-04_19_13_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0" rel="bookmark" title="Link permanente para Noite ridícula de terça-feira">Noite ridícula de terça-feira</a></h1>
+										<div align=left id=icon><small>Quarta-feira ,  04 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-04_19_13_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Noite ridícula de terça-feira&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img src="./images/noite-de-terca.jpg" alt="Noite rid&iacute;cula de ter&ccedil;a-feira" /></p><p>&Eacute; engra&ccedil;ado como as coisas s&atilde;o. &Agrave;s vezes a gente n&atilde;o se basta. N&atilde;o h&aacute; peito que consiga abrigar sozinho, todo o sentimento que de repente, numa noite rid&iacute;cula de ter&ccedil;a-feira, aparece e faz sumir o sono. &Eacute; amor! &Eacute; saudade! &Eacute; vontade de ter voc&ecirc; por perto, de abra&ccedil;ar, de ouvir o som da tua voz e de sentir a textura dos teus dedos. A tua falta machuca e faz doer. <br /><br />Antes fosse uma dor de cabe&ccedil;a, daquelas fortes que fazem vomitar at&eacute;. Antes fosse pedra nos rins, dedo quebrado, unha encravada, espinha nascendo dentro da orelha. Antes fosse. Porque nesses casos todos h&aacute; como remediar, mas e eu aqui, com essa ang&uacute;stia que sufoca, o que fa&ccedil;o? Acelero o rel&oacute;gio e minto para mim mesmo que o tempo vai passar mais r&aacute;pido, que a gente vai se ver amanh&atilde; e que eu vou poder, finalmente, sentir o seu abra&ccedil;o?<br /><br />Durante o dia &eacute; tudo sempre normal. &Eacute; trabalho, &eacute; sa&uacute;de, &eacute; aquele livro <a title="Livro: S&aacute;bado &Agrave; Noite" href="http://www.google.com.br/search?q=Livro+S&aacute;bado+&Agrave;+Noite,+Babi+Dewet" target="_blank"><em>S&aacute;bado &agrave; Noite</em></a> que n&atilde;o terminei de ler ainda, &eacute; a crise de riso no supermercado, &eacute; o filme bobo que resolvo assistir, &eacute; o frio, &eacute; o ch&aacute; de camomila. &Eacute; normal. Quando anoitece, por&eacute;m, &agrave;s vezes seu rosto me vem em mente quando fecho os olhos. E com ele vem &agrave; maldita vontade do abra&ccedil;o, esse gesto estranho que nos conforta e que impede, ainda que por instantes apenas, que o outro v&aacute; para longe.<br /><br />De repente, estou olhando uma foto sua na tela do computador, analisando seu rosto, as pintinhas, os olhos, os l&aacute;bios, a forma como voc&ecirc; ri e a forma como j&aacute; sorri por ter voc&ecirc; ao meu lado. De repente o choro que me incomoda e me faz gelar o est&ocirc;mago. E me vejo tendo que aceitar que voc&ecirc; n&atilde;o est&aacute; aqui. Dormir deveria ser tarefa mais f&aacute;cil.<br /><br />S&oacute; que n&atilde;o...</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Quarta-feira ,  04 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-04_19_13_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-04_19_13_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Noite ridícula de terça-feira&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-04_19_13_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-04_19_13_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+							
+							<tr>
+								<td valign=top style=padding-left:10px;padding-right:10px>
+									
+									
+										<h1><a name=2011_05-01_23_24_00-114134954-0></a><a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0" rel="bookmark" title="Link permanente para Osama morreu, mas não merece uma festa">Osama morreu, mas não merece uma festa</a></h1>
+										<div align=left id=icon><small>Domingo ,  01 de Maio de 2011 &raquo; <a href="#fb-comments-2011_05-01_23_24_00-114134954-0"  rel="category"><span class="fb-comments-count" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0"></span> Comentários</a></small> | <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Osama morreu, mas não merece uma festa&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div>
+										<!--inicio share--><!--fim share-->
+										<div class="entry">
+									
+									
+									<p><img style="border: 0;" src="./images/obama1xosma0.jpg" alt="Obama 1 x Osama 0" /></p><p>Quando milh&otilde;es comemoram a morte de um &uacute;nico homem... esse homem venceu. &Eacute; o que o assassinato de Osama bin Laden significa. Lamento informar.<br /><br />A como&ccedil;&atilde;o de multid&otilde;es, o discurso retumbante de Barack Obama, o servilismo colonizado da m&iacute;dia mundial na cobertura sobre o incidente, tudo isso &eacute; somente e exclusivamente primitivo, lament&aacute;vel, assustador.<br /><br />Que n&atilde;o fique nenhuma d&uacute;vida: o terrorismo da Al Qaeda &eacute; indefens&aacute;vel. Como tamb&eacute;m o &eacute; a inger&ecirc;ncia norte-americana no destino de outros povos. Todo imp&eacute;rio se constr&oacute;i e se mant&eacute;m sobre escombros e ru&iacute;nas.<br /><br />N&atilde;o vamos ser ing&ecirc;nuos. O &oacute;dio contra os norte-americanos n&atilde;o &eacute; nem mais nem menos detest&aacute;vel do que o preconceito contra os mu&ccedil;ulmanos. Um pa&iacute;s n&atilde;o sofre ataques terroristas sem que tenha dado s&eacute;rios motivos para isso.<br /><br />&Eacute; simples e preocupante. A morte de Bin Laden n&atilde;o &eacute; o fim do terrorismo isl&acirc;mico. &Eacute; apenas um baque profundo, assim como foi o ataque de 11 de setembro.<br /><br />A maior pot&ecirc;ncia b&eacute;lica do mundo demorou 10 anos para finalizar sua vingan&ccedil;a. N&atilde;o h&aacute; motivos para que isso se torne uma final de campeonato, com multid&otilde;es urrando em pra&ccedil;a p&uacute;blica.<br /><br />Toda morte deveria ser motivo de luto ou, no m&iacute;nimo, de sil&ecirc;ncio. Se n&atilde;o for por outro motivo, que seja porque outras vir&atilde;o.</p><br clear=all><span id=f><br>
+										
+										
+										
+										 <!--Publicado por Gean Ramos em Domingo ,  01 de Maio de 2011<br>-->
+									 <!--Deixe seu <a id=b href="javascript:abre('http://navblog.uol.com.br/comment.html?postFileName=2011_05-01_23_24_00-114134954-0&idBlog=2225548','356','478','1');"><span id="post2011_05-01_23_24_00-114134954-0"></span>Comentário</a> |-->
+					      								
+									<!--<a href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0"  rel="category">Link</a> </p>-->
+<div align=right id=icon>
+    <small>Compartilhe:</small> 
+    <a href="http://www.facebook.com/sharer.php?u=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0" rel="nofollow" title="Compartilhar no Facebook" target="_blank"><i class="icon-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?original_referer=https://geanramos.zip.net.50x.com.br/&text=Osama morreu, mas não merece uma festa&tw_p=tweetbutton&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0&via=geanramos" rel="nofollow" title="Compartilhar no Twitter" target="_blank"><i class="icon-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0" rel="nofollow" title="Compartilhar no Google+" target="_blank"><i class="icon-gplus"></i></a>
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0" rel="nofollow" title="Compartilhar no Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
+</div> <br/><br/>
+									<a name=fb-comments-2011_05-01_23_24_00-114134954-0></a>
+									<div class="fb-comments" data-href="https://geanramos.zip.net.50x.com.br/arch2011-05-01_2011-05-31.html#2011_05-01_23_24_00-114134954-0" data-width="450" data-numposts="1" data-order-by="reverse_time" data-locale="pt_BR"></div><br />
+								</td>
+							</tr>
+														
+
+							<tr><th height=25><a href="listArchive.html" class="b">&laquo; Posts Mais Antigos</a> | <a href="index.html" class="b">Posts Mais Novos &raquo;</a></th></tr>
+						</table>
+	
+	</div>
+	<div id="sidebar" role="complementary">
+		<ul>
+			<li id="text-2" class="widget widget_text">
+			<div class="textwidget">
+			<a href="href="/listArchive.html" id=b>/lp/kit-mkt-digital-iniciantes.html?utm_source=geanramos.zip.net&utm_medium=Banner-sidebar"><img class="aligncenter" alt="titulo2" src="./images/como-trabalhar-em-casa1.png" /></a></div>
+		</li><li id="search-2" class="widget widget_search">
+		<form action="http://www.google.com.br" id="cse-search-box">
+      <div>
+        <input type="hidden" name="cx" value="partner-pub-1416126749136213:1015486489" />
+        <input type="hidden" name="ie" value="UTF-8" />
+        <input type="text" name="q" size="22" />
+        <input type="submit" name="sa" value="Buscar" />
+      </div>
+    </form></li>
+		<li id="pages-3" class="widget widget_pages"><h1 class="widgettitle">Páginas</h1>
+			<ul>
+			<li class="page_item page-item-2"><a href="https://geanramos.zip.net.50x.com.br/index.html">Página Inicial</a></li>
+			<li class="page_item page-item-2"><a href="/listArchive.html">Arquivo</a></li>
+			<li class="page_item page-item-2"><a href="href="/listArchive.html" id=b>/lp/kit-mkt-digital-iniciantes.html?utm_source=geanramos.zip.net&utm_medium=link-sidebar">MKT para Iniciantes</a></li>
+			</ul>
+		</li>
+		<li id="categories-3" class="widget widget_categories"><h1 class="widgettitle">Categorias</h1>
+		<ul>
+	<!--<li class="cat-item cat-item-1"><a href="?cat=1" title="Ver todos os posts arquivados em Sem categoria">Sem categoria</a></li>-->
+	<li><a href="/listArchive.html" id=b>Todas as mensagens</a></li>
+			
+			<li class="cat-item cat-item-1"><a href="/listArchive.html" id=b>NULL</a></li>
+			
+
+		</ul>
+</li><li id="archives-3" class="widget widget_archive"><h1 class="widgettitle">Arquivos</h1>
+		<ul>
+	<!--<li><a href='arch2014-06-01_2014-06-30.html'>junho 2014</a></li>-->
+							
+							
+							<script type="text/javascript">montaPeriodos();</script>
+							
+							<li><a id=b href="/listArchive.html">+ veja mais</a></li>
+		</ul>
+<li id="meta-2" class="widget widget_meta"><h1 class="widgettitle">Outros Sites</h1>
+			<ul>
+			<li><a href="http://blog.uol.com.br/?utm_source=geanramos.zip.net&utm_medium=link-sidebar" title="Hospedado por Uol Blog." title="UOL Blogosfera" target="_blank">Uol Blog</a></li>
+			<li><a href="http://geanramos.rssblog.zip.net" title="Assinar este site usando RSS 2.0"><abbr title="Really Simple Syndication">XML/RSS Feed</abbr></a></li>
+			
+			<li><a href="http://medium.com/@geanramos" target="_blank">medium.com/@geanramos</a></li>
+			
+			<li><a href="http://facebook.com/geanramoss" target="_blank">facebook.com/geanramos</a></li>
+			
+			<li><a href="http://twitter.com/geanramos" target="_blank">twitter.com/geanramos</a></li>
+			
+			<li><a href="http://google.com.br/+geanramos" target="_blank">google.com.br/+geanramos</a></li>
+			
+			<li><a href="http://www.youtube.com/c/geanramos" target="_blank">youtube.com/c/geanramos</a></li>
+			
+			<li><a href="http://geanramos.tumblr.com/" target="_blank">geanramos.tumblr.com</a></li>
+			
+			<li><a href="http://fb.com/omadrugador" target="_blank">omadrugador.com</a></li>
+			
+			<li><a href="http://rdio.com/people/geanramoss/" target="_blank">rdio.com/people/geanramoss</a></li>
+			
+			<li><a href="http://linkedin.com/in/geanramos" target="_blank">linkedin.com/in/geanramos</a></li>
+			
+			<li><a href="http://vk.com/geanramos" target="_blank">vk.com/geanramos</a></li>
+			
+			<li><a href="http://soundcloud.com/geanramos" target="_blank">soundcloud.com/geanramos</a></li>
+			
+			<li><a href="http://www.flickr.com/photos/29606286@N08/" target="_blank">flickr.com/photos/geanramos</a></li>
+			
+			<li><a href="http://ogalocinza.blogspot.com/" target="_blank">ogalocinza.blogspot.com</a></li>
+			
+			</ul>
+</li>
+
+		<li id="pages-3" class="widget widget_pages"><h1 class="widgettitle">Leitinho das Crianças</h1>
+			<ul>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ADS 180x180 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:180px;height:150px"
+     data-ad-client="ca-pub-1416126749136213"
+     data-ad-slot="1358265284"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+			</ul>
+		</li>
+		<li id="pages-3" class="widget widget_pages"><h1 class="widgettitle">Visitas</h1>
+			<ul>
+			<img src="http://bloghosting.uol.com.br/contador.gif?tipo=17&amp;tam=6&amp;borda=0&amp;cor=0,0,0">
+			</ul>
+		</li>
+		</ul>
+	</div>
+<hr />
+<div id="footer" role="contentinfo">
+	<p>
+		Blog do Gean Ramos é orgulhosamente mantido no <a href="http://blog.uol.com.br/?utm_source=geanramos.zip.net&utm_medium=link-footer" title="Uol Blogosfera" >Uol Blog</a>
+		<br /><a href="http://geanramos.rssblog.zip.net">Posts (RSS)</a> e <a href="https://www.facebook.com/groups/geanramos" title="Faça parte de nossa família">Grupo no Facebook</a>.
+	</p>
+</div>
+</div>
+<!-- Gean Ramos - http://facebook.com/geanramoss -->
+<iframe id="rodape" width="100%" height="118" frameborder="0" scrolling="no" src="http://mulher.uol.com.br/blogs-rodape-blogosfera.htm?utm_source=geanramos.zip.net&utm_medium=iframe-footer"></iframe>
+		</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
