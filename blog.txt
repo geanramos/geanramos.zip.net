@@ -19,7 +19,7 @@
 div#logo_uolblog{position:absolute;left:849px;top:188px;z-index:1}
 <!--#headerimg h6 a, #headerimg h6 a:visited, #headerimg .description { color: #FFFFFF; } -->
 </style>
-<style type='text/css'></style>
+<style type='text/css'></style><script>
 
 var zeroComm = "<%VAR BLOG_TEXT_NO_COMMENT%>";
 var humComm = "<%VAR BLOG_TEXT_ONE_COMMENT%>";
